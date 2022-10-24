@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+		<title>Home</title>
+	</head>
+	<body>
+		<p id="jsNeeded" style="color: red; font-size: 30px; display: none;">This page needs JavaScript to function</p>
+		<section id="mainSection">
+			<h1 id="splash">[ dd &gt; Rufus ]</h1>
+			<button onclick="refreshSplash();">[ Refresh Splash ]</button>
+	   
+			<div class="currentTime">
+				<h3>The current time is</h3>
+				<h1 id="time">[ 11:17:02 ]</h1>
+				<h2 id="date">[ Monday ] the [ 24 ] of [ October ]</h2>
+			</div>
+	
+			<div class="links" id="links">
+				<a href="https://invidious.sevengames.xyz/">[ invidious ]</a>
+				-
+				<a href="https://libreddit.sevengames.xyz/">[ libreddit ]</a>
+				-
+				<a href="https://app.element.io/">[ element ]</a>
+				-
+				<a href="https://github.com/">[ github ]</a>
+				-
+				<a href="https://mail.proton.me/">[ mail ]</a>
+			</div>
+		</section>
+	
+
+<style>
+	:root {
+		color: #f8f8f2;
+		text-align: center;
+		background-color: #2e3440;
+		--button-pressed: #ff79c6;
+		--button-hover: #676f7e;
+	}
+	
+	#mainSection h1 {
+		font-size: 3em;
+	}
+	#mainSection h2 {
+		font-size: 2em;
+	}
+	#splash {
+		font-size: 2em;
+		position: fixed;
+		left: 50%;
+		width: 100%;
+		-webkit-transform: translate(-50%, 0%);
+		transform: translate(-50%, 0%);
+	}
+	#mainSection .currentTime {
+		position: fixed;
+		top: 50%;
+		left: 50%;
+		width: 100%;
+		-webkit-transform: translate(-50%, 0%);
+		transform: translate(-50%, -50%);
+	}
+	#mainSection .currentTime h1, h2, h3 {
+		margin-top: 0px;
+		margin-bottom: 0px;
+	}
+	#mainSection .links {
+		bottom: 10px;
+		position: absolute;
+		left: 50%;
+		width: 100%;
+		-webkit-transform: translate(-50%, 0%);
+    	transform: translate(-50%, 0%);
+	}
+	a, button {
+		font-family: "Liberation Sans";
+		border: none;
+		padding: 5px;
+		font-size: 17px;
+		text-decoration: none;
+		color: var(--button);
+		background-color: transparent;
+	}
+	a:hover, button:hover {
+		color: var(--button-hover);
+	}
+	a:active, button:active {
+		color: var(--button-pressed);
+	}
+</style>
+<script type="text/javascript">
+	document.getElementById('jsNeeded').style.display = "none";
+
+	const month = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ];
+	const weekday = [ "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday" ,"Friday", "Saturday" ];
+
+	var splashes = [ "GNU not Unix", "OpenBaSeD", "dd > Ventoy", "dd > Rufus", "Install Gentoo", "Emacs is better than vi", "vi is better than Emacs",
+		"Links is the best!", "Edge is Chromium", "vi vi vi the editor of the beast", "Rust <3" ];
+
+	function refreshSplash() {
+		const splashLabel = document.getElementById("splash");
+		splashLabel.textContent = "[ " + splashes[Math.round(Math.random() * (splashes.length - 1))] + " ]";
+	}
+	
+	function refreshTime() {
+		const timeLabel = document.getElementById("time");
+		const dateLabel = document.getElementById("date");
+		const d = new Date();
+
+		// Time
+		const currentHour = ("0" + d.getHours()).slice(-2);
+		const currentMinute = ("0" + d.getMinutes()).slice(-2);
+		const currentSecond = ("0" + d.getSeconds()).slice(-2);
+
+		// Date
+		const currentDay = weekday[d.getDay()];
+		const currentDate = ("0" + d.getDate()).slice(-2);
+		const currentMonth = month[d.getMonth()];
+
+		timeLabel.textContent = "[ " + currentHour + ":" + currentMinute + ":" + currentSecond + " ]";
+		dateLabel.textContent = "[ " + currentDay + " ] the [ " + currentDate  + " ] of [ " + currentMonth + " ]";
+	}
+
+	refreshSplash();
+	refreshTime();
+	setInterval(refreshTime, 1000);
+</script>
+</body></html>
